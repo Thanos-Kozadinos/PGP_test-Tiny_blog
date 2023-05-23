@@ -9,47 +9,40 @@ export const MainBlog: FC = () => {
             title: "a",
             body: "a",
             userId: 0,
-            tags: ["history","fiction"],
+            tags: ["history","fiction", "crime"],
             reactions: 0}]
         } 
     const [data, setData] = useState<IListPosts>(defaulData);
-    const [showTagSection, setShowTagSection] = useState(true);
-    
+   
     const getData = async () => {
         const postsFromApi = await getPostFormApi();
         setData(postsFromApi);
     }
-    
-    const handleButtonClick = () => {
-        setShowTagSection(!showTagSection);
-    };
+
     const uniqueTags = Array.from(new Set(data.posts.flatMap(post => post.tags)));  
 
-    const [selectedOption, setSelectedOption] = useState(uniqueTags[Math.floor(Math.random() * uniqueTags.length)]);
-    
-    const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedOption(event.target.value);
-      };
-    
-      
+    // const [selectedOption, setSelectedOption] = useState(uniqueTags[Math.floor(Math.random() * uniqueTags.length)]);
+
       useEffect(() => {
           getData();
         }, []);  
         
     return (
         <>
-            <div>
-                <div className="dropdownMenus">
-                <select value={selectedOption} onChange={handleOptionChange}>
-                    {uniqueTags.map((option, index) => (
-                    <option key={index} value={option}>
-                        {option}
-                    </option>
-                    ))}
-                </select>
-                    <button onClick={handleButtonClick}>Show Tag Section</button>
-                </div>
-                {showTagSection && <TagSection data={data} tag={selectedOption}/>}
+            <div>       
+                {<TagSection data={data} uniqueTags={uniqueTags}/>}
+            </div>
+            <div>       
+                {<TagSection data={data} uniqueTags={uniqueTags}/>}
+            </div>
+            <div>       
+                {<TagSection data={data} uniqueTags={uniqueTags}/>}
+            </div>
+            <div>       
+                {<TagSection data={data} uniqueTags={uniqueTags}/>}
+            </div>
+            <div>       
+                {<TagSection data={data} uniqueTags={uniqueTags}/>}
             </div>
             
         </>
