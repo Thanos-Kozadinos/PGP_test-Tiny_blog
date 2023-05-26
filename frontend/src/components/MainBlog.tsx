@@ -20,8 +20,7 @@ export const MainBlog: FC = () => {
     }
 
     const uniqueTags = Array.from(new Set(data.posts.flatMap(post => post.tags)));  
-
-    // const [selectedOption, setSelectedOption] = useState(uniqueTags[Math.floor(Math.random() * uniqueTags.length)]);
+    const initialOptions = uniqueTags.slice(5);
 
       useEffect(() => {
           getData();
@@ -29,22 +28,12 @@ export const MainBlog: FC = () => {
         
     return (
         <>
-            <div>       
-                {<TagSection data={data} uniqueTags={uniqueTags}/>}
-            </div>
-            <div>       
-                {<TagSection data={data} uniqueTags={uniqueTags}/>}
-            </div>
-            <div>       
-                {<TagSection data={data} uniqueTags={uniqueTags}/>}
-            </div>
-            <div>       
-                {<TagSection data={data} uniqueTags={uniqueTags}/>}
-            </div>
-            <div>       
-                {<TagSection data={data} uniqueTags={uniqueTags}/>}
-            </div>
-            
+        <div className="gallery">
+        {initialOptions.map(option => 
+            <div className="tagSection">       
+                {<TagSection data={data} uniqueTags={uniqueTags} option={option}/>}
+            </div>)}
+        </div>    
         </>
     )
 }
